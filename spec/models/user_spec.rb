@@ -10,35 +10,6 @@ RSpec.describe User, type: :model do
     it "全ての項目が確認できれば登録できる" do
       expect(@user).to be_valid
     end
-    it "emailに@があれば登録できる" do
-      @user.email = 'test@test'
-      expect(@user).to be_valid
-    end
-    it "passwordとpassword_confirmationが6文字以上であれば登録できる" do
-      @user.password = 'password1'
-      @user.password_confirmation = 'password1'
-      expect(@user).to be_valid
-    end
-    it "名字が全角であれば登録できる" do
-      @user.last_name_kanji = '山田'
-      @user.valid?
-      expect(@user).to be_valid
-    end
-    it "名前が全角であれば登録できる" do
-      @user.first_name_kanji = '太郎'
-      @user.valid?
-      expect(@user).to be_valid
-    end
-    it "名字がカナ全角であれば登録できる" do
-      @user.last_name_kana = 'ヤマダ'
-      @user.valid?
-      expect(@user).to be_valid
-    end
-    it "名前がカナ全角であれば登録できる" do
-      @user.first_name_kana = 'タロウ'
-      @user.valid?
-      expect(@user).to be_valid
-    end
    end
 
 
@@ -65,7 +36,7 @@ RSpec.describe User, type: :model do
     it 'メールアドレスは、@を含む必要があること' do
       @user.email = 'test'
       @user.valid?
-      expect(@user).to be_invalid
+      expect(@user.errors.full_messages).to include('Email is invalid')
     end
     it 'パスワードが必須であること' do
       @user.password = ''
