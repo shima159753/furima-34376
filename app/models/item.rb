@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :name, :text, :price, presence: true
+  validates :name, :text, :price, :image, presence: true
 
   validates :category_id, :state_id, :delivery_fee_id, :delivery_area, :delivery_days, numericality: { other_than: 1 }
 
