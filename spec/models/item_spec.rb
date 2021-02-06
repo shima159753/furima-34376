@@ -45,9 +45,9 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("State is not a number")
      end
      it '商品状態に0が選択されている' do
-      @item.category_id = 0
+      @item.state_id = 0
       @item.valid?
-      expect(@item.errors.full_messages).to include("Delivery fee must be other than 0")
+      expect(@item.errors.full_messages).to include("State must be other than 0")
      end
      it '配達料金負担が必須であること' do
       @item.delivery_fee_id = ''
@@ -55,7 +55,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Delivery fee is not a number")
      end
      it '配達料金負担に0が選択されている' do
-      @item.category_id = 0
+      @item.delivery_fee_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Delivery fee must be other than 0")
      end
@@ -65,7 +65,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Delivery area is not a number")
      end
      it '配達エリアに0が選択されている' do
-      @item.category_id = 0
+      @item.delivery_area_id = 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Delivery area must be other than 0")
      end
@@ -75,7 +75,7 @@ RSpec.describe Item, type: :model do
       expect(@item.errors.full_messages).to include("Delivery days is not a number")
      end
      it '配達日に0が選択されている' do
-      @item.category_id = 0
+      @item.delivery_days_id= 0
       @item.valid?
       expect(@item.errors.full_messages).to include("Delivery days must be other than 0")
      end
