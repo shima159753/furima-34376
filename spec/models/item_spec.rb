@@ -83,13 +83,24 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
-      it '料金が範囲が適性であること' do
-        @item.price = '100'
+
+      it '料金が299円では出品できない' do
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end
-      it '料金が半角数字が適性であること' do
-        @item.price = 'あああ'
+      it '料金が10000000円では出品できない' do
+        @item.price = 10000000
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
+      end
+      it '半角英数字混合のとき出品できない' do
+        @item.price = "aaa111"
+        @item.valid?
+        expect(@item.errors.full_messages).to include('Price is not included in the list')
+      end
+      it '半角英語では出品できない' do
+        @item.price = "aaa"
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not included in the list')
       end

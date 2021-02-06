@@ -9,9 +9,15 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates :name, :text, :price, :image, presence: true
+  with_options presence: true, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' } do
+    validates :price
+    validates_inclusion_of :price, in: 300..9_999_999
+  end
+
+
+  validates :name, :text, :image, presence: true
 
   validates :category_id, :state_id, :delivery_fee_id, :delivery_area_id, :delivery_days_id, numericality: { other_than: 0 }
 
-  validates_inclusion_of :price, in: 300..9_999_999
+
 end
