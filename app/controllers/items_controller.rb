@@ -21,11 +21,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
-
   end
 
   def update
@@ -38,8 +36,8 @@ class ItemsController < ApplicationController
 
   def destroy
     if user_signed_in?
-    @item.destroy
-    redirect_to root_path
+      @item.destroy
+      redirect_to root_path
     end
   end
 
