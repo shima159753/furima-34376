@@ -1,11 +1,11 @@
 class OrderBuyer
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :city, :address, :building_name, :tel, :order_id
+  attr_accessor :user_id, :item_id, :postal_code, :delivery_area_id, :city, :address, :building_name, :tel, :order_id, :token
   
   #:user_id, :item_id,, :order_id,
 
   with_options presence: true do
-    validates  :city, :address, :tel,:user_id, :item_id
+    validates  :city, :address, :tel, :user_id, :item_id, :token
     validates :postal_code, format: {with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Include hyphen(-)"}
   end
   validates :delivery_area_id, numericality: {other_than: 0, message: "can't be blank"}

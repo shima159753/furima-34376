@@ -10,4 +10,4 @@ function price() {
   priceProfit.innerHTML = ( priceInput.value - Math.floor(inputValue * 0.1)).toLocaleString();
   });
 }
-window.addEventListener("load", price)
+window.addEventListener("load", price);
