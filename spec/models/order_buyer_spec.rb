@@ -27,7 +27,7 @@ RSpec.describe OrderBuyer, type: :model do
         expect(@order_buyer.errors.full_messages).to include("User can't be blank")
       end
 
-      it 'user_idが空だと保存できないこと' do
+      it 'item_idが空だと保存できないこと' do
         @order_buyer.item_id = nil
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include("Item can't be blank")
