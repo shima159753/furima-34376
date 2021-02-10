@@ -85,6 +85,11 @@ RSpec.describe OrderBuyer, type: :model do
         @order_buyer.valid?
         expect(@order_buyer.errors.full_messages).to include('Tel is invalid.')
       end
+      it 'telが12桁以上では保存できないこと' do
+        @order_buyer.tel = '090123456789'
+        @order_buyer.valid?
+        expect(@order_buyer.errors.full_messages).to include('Tel is invalid.')
+      end
     end
   end
 end
