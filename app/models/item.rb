@@ -7,9 +7,8 @@ class Item < ApplicationRecord
   belongs_to :delivery_days
 
   belongs_to :user
-  has_one_attached :image
-  has_one :order
-  has_one :buyer
+  has_one_attached :image, dependent: :destroy
+  has_one :order, dependent: :destroy
 
   with_options presence: true, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' } do
     validates :price
