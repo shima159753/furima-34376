@@ -1,22 +1,15 @@
 class OrdersController < ApplicationController
   before_action :move_to_index, only: [:index]
-  before_action :sold_move_to_index, only: [:index]
+  before_action :item_params, only: [:index,:create,:move_to_index]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_buyer = OrderBuyer.new
   end
 
   def create
-   @item = Item.find(params[:item_id])
    @order_buyer =OrderBuyer.new(order_params)
    if @order_buyer.valid?
-    Payjp.api_key = "sk_test_7da02b43f9bc82acc3822229"
-    Payjp::Charge.create(
-     amount: @item.price,
-     card: params[:token],
-     currency: "jpy"
-    )
+    pay_item
     @order_buyer.save
     redirect_to root_path
    else
@@ -32,16 +25,23 @@ class OrdersController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    if current_user.id == @item.user_id
+    if current_user.id == @item.user_id  ||  @item.order != nil
       redirect_to root_path
     end
   end
 
-  def sold_move_to_index
+  def pay_item
     @item = Item.find(params[:item_id])
-    if @item.order != nil
-      redirect_to root_path 
-    end
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: params[:token],
+      currency: "jpy"
+    )
+  end
+
+  def item_params
+    @item = Item.find(params[:item_id])
   end
 
 end
