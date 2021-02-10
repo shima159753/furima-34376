@@ -11,7 +11,6 @@ class Item < ApplicationRecord
   has_one :order
   has_one :buyer
 
-
   with_options presence: true, format: { with: /\A[0-9]+\z/, message: '半角数字を使用してください' } do
     validates :price
     validates_inclusion_of :price, in: 300..9_999_999
