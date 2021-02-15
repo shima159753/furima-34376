@@ -191,12 +191,24 @@
   margin-bottom: 4vh;
 }
 
+.sell-btn:hover {
+  background: #fff;
+  border: 1px solid #ea352d;
+  color: #ea352d;
+}
+
 .back-btn {
   background: #aaa;
   border: 1px solid #aaa;
   color: #fff;
   padding: 15px 35%;
   text-decoration: none;
+}
+
+.back-btn:hover {
+  background: #fff;
+  border: 1px solid #aaa;
+  color: #aaa;
 }
 
 /* /下部ボタン */

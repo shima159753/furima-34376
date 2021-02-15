@@ -60,6 +60,12 @@
   padding: 2vh 10vw;
 }
 
+.item-red-btn:hover {
+  background-color: #fff;
+  color: #ea352d;
+  border: 1px solid #ea352d;
+}
+
 .or-text {
   font-size: 20px;
 }

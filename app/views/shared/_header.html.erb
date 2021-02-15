@@ -12,9 +12,10 @@
   <div class='nav'>
     <ul class='lists-left'>
       <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
+
       <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
     </ul>
-    <ul class='lists-right'>
+    <ul class='lists-right' id="lists-right">
       <% if user_signed_in? %>
       <li><%= link_to current_user.nickname, "#", class: "user-nickname"%> </li>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>

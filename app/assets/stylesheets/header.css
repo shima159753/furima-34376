@@ -85,10 +85,18 @@
   font-weight: bold;
 }
 
+.user-nickname:hover {
+  color: #CCCCCC;
+}
 
 .logout {
   text-decoration: none;
   color: #333333;
+}
+
+.logout:hover {
+  text-decoration: none;
+  color: #CCCCCC;
 }
 
 .login {
@@ -98,7 +106,15 @@
   color: #333333;
 }
 
+.login:hover {
+  color: #CCCCCC;
+}
+
 .sign-up {
   text-decoration: none;
   color: #333333;
+}
+
+.sign-up:hover {
+  color: #CCCCCC;
 }

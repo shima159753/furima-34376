@@ -237,6 +237,14 @@ a {
   font-weight: bold;
 }
 
+.item-contents>.subtitle:hover {
+  font-size: 3vh;
+  margin: 1vh 0;
+  text-decoration: none;
+  color: #CCFFE8;
+  font-weight: bold;
+}
+
 .item-lists {
   width: 100vw;
   display: flex;
@@ -248,6 +256,12 @@ a {
   width: 37vh;
   padding: 1vw;
   background-color: #FFF;
+}
+
+.item-lists>.list:hover {
+  width: 37vh;
+  padding: 1vw;
+  background-color: #3ccace;
 }
 
 
