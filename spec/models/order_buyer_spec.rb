@@ -24,71 +24,71 @@ RSpec.describe OrderBuyer, type: :model do
       it 'user_idが空だと保存できないこと' do
         @order_buyer.user_id = nil
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("User can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("Userを入力してください")
       end
 
       it 'item_idが空だと保存できないこと' do
         @order_buyer.item_id = nil
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("Item can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("Itemを入力してください")
       end
 
       it 'tokenが空だと保存できないこと' do
         @order_buyer.token = nil
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("Token can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("クレジットカード情報を入力してください")
       end
       it 'postal_codeが空だと保存できないこと' do
         @order_buyer.postal_code = nil
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("Postal code can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("郵便番号を入力してください")
       end
 
       it 'postal_codeがにハイフンがないと保存できないこと' do
         @order_buyer.postal_code = '1234567'
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
+        expect(@order_buyer.errors.full_messages).to include('郵便番号は無効です。ハイフン（-）を含めて下さい')
       end
 
       it 'delivery_area_idが0だと保存できないこと' do
         @order_buyer.delivery_area_id = 0
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("Delivery area can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("都道府県を入力して下さい")
       end
 
       it 'cityが空だと保存できないこと' do
         @order_buyer.city = nil
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("City can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("市区町村を入力してください")
       end
 
       it 'addressが空だと保存できないこと' do
         @order_buyer.address = nil
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("Address can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("番地を入力してください")
       end
 
       it 'telが空だと保存できないこと' do
         @order_buyer.tel = nil
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include("Tel can't be blank")
+        expect(@order_buyer.errors.full_messages).to include("電話番号を入力してください")
       end
 
       it 'telが10桁か11桁の数字でないと保存できないこと' do
         @order_buyer.tel = '333'
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include('Tel is invalid.')
+        expect(@order_buyer.errors.full_messages).to include('電話番号は無効です。10桁もしくは11桁で入力して下さい')
       end
 
       it 'telが半角数字でないと保存できないこと' do
         @order_buyer.tel = 'あああああaaaaaa'
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include('Tel is invalid.')
+        expect(@order_buyer.errors.full_messages).to include('電話番号は無効です。10桁もしくは11桁で入力して下さい')
       end
       it 'telが12桁以上では保存できないこと' do
         @order_buyer.tel = '090123456789'
         @order_buyer.valid?
-        expect(@order_buyer.errors.full_messages).to include('Tel is invalid.')
+        expect(@order_buyer.errors.full_messages).to include('電話番号は無効です。10桁もしくは11桁で入力して下さい')
       end
     end
   end

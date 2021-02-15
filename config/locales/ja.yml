@@ -16,7 +16,7 @@ ja:
        state_id: 商品の状態
        delivery_fee_id: 配送料の負担
        delivery_area_id: 発送元の地域
-       delivery_days_ud: 発送までの日数
+       delivery_days_id: 発送までの日数
        price: 価格
  activemodel:
    attributes:
