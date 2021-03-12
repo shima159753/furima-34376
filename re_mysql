@@ -1,0 +1,96 @@
+#!/bin/bash
+
+delete_mysql=$1
+new_mysql=$2
+
+# -------------------- mysqlのアンインストール  --------------------
+# サービスの停止
+echo "========================================="
+echo ""
+echo "$delete_mysql を停止処理を実行します。"
+echo ""
+echo "========================================="
+brew services stop $delete_mysql
+
+# プロセスの完全kill
+pid=`ps aux | grep /var/mysql | grep -v grep | awk '{ print $2 }'`
+kill -9 $pid
+
+# mysqlのアンインストール
+brew uninstall $delete_mysql
+# brew cleanup
+echo "$delete_mysql をアンインストールしました"
+echo "mysqlの関連のファイルを削除するためにPCのパスワードを入力してください"
+
+# 関連ファイルの削除
+sudo rm -rf /usr/local/mysql
+sudo rm -rf /Library/StartupItems/MYSQL
+sudo rm -rf /Library/PreferencePanes/MySQL.prefPane
+sudo rm -rf /Library/Receipts/mysql-.pkg
+sudo rm -rf /usr/local/Cellar/mysql*
+sudo rm -rf /usr/local/bin/mysql*
+sudo rm -rf /usr/local/var/mysql*
+sudo rm -rf /usr/local/etc/my.cnf
+sudo rm -rf /usr/local/share/mysql*
+sudo rm -rf /usr/local/opt/mysql*
+echo "mysqlの関連ファイルを削除しました"
+
+# --------------------  mysqlのインストール  --------------------
+echo "========================================="
+echo ""
+echo "mysqlのインストールを開始します。"
+echo ""
+echo "========================================="
+
+brew install $new_mysql
+echo "========================================="
+echo ""
+echo "$new_mysql をインストールしました。"
+echo ""
+echo "========================================="
+
+# mysqlの自動起動設定
+echo ""
+echo "mysqlの自動起動設定を行います。"
+brew tap homebrew/services
+brew services start $new_mysql
+
+# ログインシェルの判断
+shell_type=`echo "$SHELL" | sed -e "s/^\/bin\/\(.*\)$/\1/g"`
+login_shell=""
+if [ "$shell_type" = "zsh" ]; then
+  login_shell=".zshrc"
+elif [ "$shell_type" = "bash" ]; then
+  login_shell=".bash_profile"
+fi
+
+echo ""
+echo "${login_shell}にパスを通します。"
+echo ""
+
+# パスの判断
+version=`echo "$new_mysql" | sed -e "s/^mysql\(.*\)$/\1/g"`
+if [ "$version" = "@8.0" ]; then
+  version="mysql"
+else
+  version=$new_mysql
+fi
+
+# パスを通す zshrcのとき
+echo 'export PATH="/usr/local/opt/'${version}'/bin:$PATH"' >> $HOME/$login_shell
+source $HOME/$login_shell
+
+# mysqlが起動するまで待つ
+echo "mysqlの起動確認を行います..."
+sleep 3
+mysql.server status
+sleep 2
+
+echo ""
+echo "完了しました。"
+echo "------------------------------------------------------------------"
+echo "※mysqlのパスワードを設定する場合はは以下のコマンドを入力してください"
+echo "①  mysql -u root"
+echo "②  SET PASSWORD = 'ここに新しいパスワード';"
+echo "③  exit;"
+echo "------------------------------------------------------------------"
